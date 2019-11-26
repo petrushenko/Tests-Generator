@@ -1,0 +1,7 @@
+https://www.youtube.com/watch?v=jypKhFJVHF8&list=PLxk7xaZWBdUT23QfaQTCJDG6Q1xx6uHdG&index=2 - англ, работа с API для разбора дерева
+https://habr.com/ru/company/pvs-studio/blog/301204/ - перевод статьи по работе с API Roslyn
+https://opdhsblobprod02.blob.core.windows.net/contents/c6aea4f5457448ee818b7292ba695982/68f029399ff2e5c03e47718ca79e52d8?sv=2015-04-05&sr=b&sig=N5ElEsX5Ywy8rZPo0L5V6w%2Bafvl75TUhsSJ1Bx2jj9A%3D&st=2019-11-21T17%3A15%3A29Z&se=2019-11-22T17%3A25%3A29Z&sp=r - pdf документация Roslyn
+
+
+https://docs.microsoft.com/en-us/archive/msdn-magazine/2015/february/csharp-adding-a-code-fix-to-your-roslyn-analyzer - Roslyn
+https://docs.microsoft.com/en-us/archive/msdn-magazine/2014/special-issue/csharp-and-visual-basic-use-roslyn-to-write-a-live-code-analyzer-for-your-api
