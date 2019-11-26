@@ -27,7 +27,7 @@ namespace ConsoleApp1
                 @"D:\bsuir\C#\projects\ConsoleApp1\ConsoleApp2\Program.cs",
                 @"D:\bsuir\C#\projects\ConsoleApp1\ConsoleApp2\Program.cs",
                 @"D:\bsuir\C#\projects\ConsoleApp1\ConsoleApp2\BaseCls.cs"
-            }, @"D:\bsuir\C#\projects\foo", 2, 2, 2);
+            }, @"D:\bsuir\C#\projects\foo", 1, 1, 1);
             Console.WriteLine(Process.GetCurrentProcess().Threads.Count);
             //while (r.Status != TaskStatus.Canceled) { }
             r.Wait();

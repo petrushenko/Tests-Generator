@@ -71,30 +71,6 @@ namespace TestsGenerator
             var saveTests = new ActionBlock<string[]>(action: async tests =>
             {
                 Console.WriteLine("Start Saving PID:{0}", Thread.CurrentThread.ManagedThreadId);
-                //var i = 1;
-                //var sync = new object();
-                //Parallel.ForEach(tests, async test =>
-                //{
-                //    var originalName = GetTestFilename(test);
-                //    var filename = Path.Combine(pathToSave, originalName+ ".cs");
-                //    FileStream file;
-                //    lock (sync)
-                //    {
-                //        while (File.Exists(filename))
-                //        {
-
-                //            var newName = originalName + (i++).ToString();
-                //            filename = Path.Combine(pathToSave, newName + ".cs");
-                //        }
-                //        file = File.Create(filename);
-                //    }
-
-                //    using (var outputFile = new StreamWriter(file))
-                //    {
-                //        await outputFile.WriteAsync(test);
-                //    }
-                //    file.Close();
-                //});
                 var i = 1;
                 foreach (var test in tests)
                 {
@@ -123,8 +99,9 @@ namespace TestsGenerator
             {
                 getText.Post(file);
             }
+            //Parallel.ForEach(classFiles, (file) => getText.Post(file));
             getText.Complete();
-            return getText.Completion;
+            return saveTests.Completion;
         }
 
         private string GetTestFilename(string test)
@@ -139,7 +116,6 @@ namespace TestsGenerator
         {
             var tree = CSharpSyntaxTree.ParseText(fileContent);
             var root = tree.GetRoot();
-
             return root.DescendantNodes().OfType<ClassDeclarationSyntax>().Where(@class => @class.Modifiers.Any(SyntaxKind.PublicKeyword)).ToArray();
         }
 
