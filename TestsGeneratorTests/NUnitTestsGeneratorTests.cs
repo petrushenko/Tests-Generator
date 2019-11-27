@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -14,16 +13,22 @@ namespace TestsGeneratorTests
     {
         private readonly string _fileForTest = @"..\..\FilesForTests\MyClassFile.cs";
         private readonly string _folderForTests = @"..\..\TestsFolder\";
+
+        [TestInitialize]
+        public void Setup()
+        {
+            ClearFolder(_folderForTests);
+        }
+
         [TestMethod]
         public void FileNameTest()
         {
-            ClearFolder(_folderForTests);
             var testsGenerator = new NUnitTestsGenerator();
             var waiter = testsGenerator.GenerateTests(new []{ _fileForTest}, _folderForTests, 8,8,8);
             waiter.Wait();
             var testFiles = Directory.GetFiles(_folderForTests).Select(Path.GetFileName);
-            bool contains = false;
-            string cs = "BarClassTests.cs";
+            var contains = false;
+            var cs = "BarClassTests.cs";
             var enumerable = testFiles as string[] ?? testFiles.ToArray();
             foreach (var file in enumerable)
             {
@@ -42,7 +47,6 @@ namespace TestsGeneratorTests
         [TestMethod]
         public void ClassNameTest()
         {
-            ClearFolder(_folderForTests);
             var testsGenerator = new NUnitTestsGenerator();
             var waiter = testsGenerator.GenerateTests(new []{ _fileForTest}, _folderForTests, 8,8,8);
             waiter.Wait();
@@ -57,7 +61,6 @@ namespace TestsGeneratorTests
         [TestMethod]
         public void MethodNameTest()
         {
-            ClearFolder(_folderForTests);
             var testsGenerator = new NUnitTestsGenerator();
             var waiter = testsGenerator.GenerateTests(new []{ _fileForTest}, _folderForTests, 8,8,8);
             waiter.Wait();
@@ -86,20 +89,6 @@ namespace TestsGeneratorTests
         private static string GetText(string file)
         {
             return File.ReadAllText(file);
-            //var sb = new StringBuilder();
-            //using (var sourceStream = new FileStream(file,  
-            //    FileMode.Open, FileAccess.Read, FileShare.Read,  
-            //    bufferSize: 4096, useAsync: true))  
-            //{
-            //    byte[] buffer = new byte[0x1000];  
-            //    int numRead;  
-            //    while ((numRead = sourceStream.Read(buffer, 0, buffer.Length)) != 0)  
-            //    {  
-            //        string text = Encoding.UTF8.GetString(buffer, 0, numRead);  
-            //        sb.Append(text);  
-            //    }  
-            //    return sb.ToString();  
-            //}
         }
 
         private void ClearFolder(string folder)
