@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -24,9 +22,21 @@ namespace TestsGeneratorTests
             var waiter = testsGenerator.GenerateTests(new []{ _fileForTest}, _folderForTests, 8,8,8);
             waiter.Wait();
             var testFiles = Directory.GetFiles(_folderForTests).Select(Path.GetFileName);
-            Assert.IsTrue(testFiles.Contains("BarClassTests.cs"));
-            Assert.IsTrue(testFiles.Contains("FooClassTests.cs"));
-            Assert.AreEqual(2, testFiles.ToArray().Length);
+            bool contains = false;
+            string cs = "BarClassTests.cs";
+            var enumerable = testFiles as string[] ?? testFiles.ToArray();
+            foreach (var file in enumerable)
+            {
+                if (Equals(file, cs))
+                {
+                    contains = true;
+                    break;
+                }
+            }
+
+            Assert.IsTrue(contains);
+            Assert.IsTrue(enumerable.Contains("FooClassTests.cs"));
+            Assert.AreEqual(2, enumerable.ToArray().Length);
         }
 
         [TestMethod]
@@ -73,7 +83,7 @@ namespace TestsGeneratorTests
             Assert.IsNull(diagnostics);
         }
 
-        private string GetText(string file)
+        private static string GetText(string file)
         {
             var sb = new StringBuilder();
             using (var sourceStream = new FileStream(file,  
@@ -93,13 +103,13 @@ namespace TestsGeneratorTests
 
         private void ClearFolder(string folder)
         {
-            System.IO.DirectoryInfo di = new DirectoryInfo(folder);
+            var di = new DirectoryInfo(folder);
 
-            foreach (FileInfo file in di.GetFiles())
+            foreach (var file in di.GetFiles())
             {
                 file.Delete(); 
             }
-            foreach (DirectoryInfo dir in di.GetDirectories())
+            foreach (var dir in di.GetDirectories())
             {
                 dir.Delete(true); 
             }

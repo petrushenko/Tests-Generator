@@ -2,7 +2,7 @@
 
 namespace TestsGenerator
 {
-    static class SyntaxNodeHelper
+    internal static class SyntaxNodeHelper
     {
         public static bool TryGetParentSyntax<T>(this SyntaxNode syntaxNode, out T result)
             where T : SyntaxNode
