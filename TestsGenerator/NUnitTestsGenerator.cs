@@ -49,12 +49,13 @@ namespace TestsGenerator
                 //Console.WriteLine("Start generate tests for classes PID:{0}", Thread.CurrentThread.ManagedThreadId);
                 var classes = GetClassesFromText(text);
                 var result = new BlockingCollection<string>();
-                
-                Parallel.ForEach(classes, @class =>
+
+                foreach (var @class in classes)
                 {
                     var classTest = GenerateClassTest(@class);
                     result.Add(classTest);
-                });
+                    
+                }
                 //Console.WriteLine("Stop generate tests for classes PID:{0}", Thread.CurrentThread.ManagedThreadId);
 
                 return result.ToArray();
@@ -133,7 +134,9 @@ namespace TestsGenerator
                     .AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
                         SyntaxFactory.Attribute(SyntaxFactory.IdentifierName("Test"))
                     )));
+                //SingletonSeparatedList singleton? separated?
                 members.Add(methodDeclaration);
+
             }
             //Test class
             var className = @class.Identifier.Text;

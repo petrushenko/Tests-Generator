@@ -85,20 +85,21 @@ namespace TestsGeneratorTests
 
         private static string GetText(string file)
         {
-            var sb = new StringBuilder();
-            using (var sourceStream = new FileStream(file,  
-                FileMode.Open, FileAccess.Read, FileShare.Read,  
-                bufferSize: 4096, useAsync: true))  
-            {
-                byte[] buffer = new byte[0x1000];  
-                int numRead;  
-                while ((numRead = sourceStream.Read(buffer, 0, buffer.Length)) != 0)  
-                {  
-                    string text = Encoding.UTF8.GetString(buffer, 0, numRead);  
-                    sb.Append(text);  
-                }  
-                return sb.ToString();  
-            }
+            return File.ReadAllText(file);
+            //var sb = new StringBuilder();
+            //using (var sourceStream = new FileStream(file,  
+            //    FileMode.Open, FileAccess.Read, FileShare.Read,  
+            //    bufferSize: 4096, useAsync: true))  
+            //{
+            //    byte[] buffer = new byte[0x1000];  
+            //    int numRead;  
+            //    while ((numRead = sourceStream.Read(buffer, 0, buffer.Length)) != 0)  
+            //    {  
+            //        string text = Encoding.UTF8.GetString(buffer, 0, numRead);  
+            //        sb.Append(text);  
+            //    }  
+            //    return sb.ToString();  
+            //}
         }
 
         private void ClearFolder(string folder)
