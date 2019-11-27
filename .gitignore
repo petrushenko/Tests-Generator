@@ -263,3 +263,4 @@ __pycache__/
 
 #This project tmp test files
 ConsoleTestsGenerator/Tests/*
+TestsGeneratorTests/TestsFolder/*
