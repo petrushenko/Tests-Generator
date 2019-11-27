@@ -5,3 +5,9 @@ https://opdhsblobprod02.blob.core.windows.net/contents/c6aea4f5457448ee818b7292b
 
 https://docs.microsoft.com/en-us/archive/msdn-magazine/2015/february/csharp-adding-a-code-fix-to-your-roslyn-analyzer - Roslyn
 https://docs.microsoft.com/en-us/archive/msdn-magazine/2014/special-issue/csharp-and-visual-basic-use-roslyn-to-write-a-live-code-analyzer-for-your-api
+
+При реализации использовать async/await и асинхронный API. Для реализации конвейера можно использовать Dataflow API:
+https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/dataflow-task-parallel-library
+https://docs.microsoft.com/en-us/dotnet/standard/parallel-programming/walkthrough-creating-a-dataflow-pipeline
+Главный метод генератора должен возвращать Task и не выполнять никаких ожиданий внутри (блокирующих вызовов task.Wait(), task.Result, etc). Для ввода-вывода также необходимо использовать асинхронный API (https://docs.microsoft.com/en-us/dotnet/standard/io/asynchronous-file-i-o).
+
